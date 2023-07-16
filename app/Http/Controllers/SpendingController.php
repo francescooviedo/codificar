@@ -28,3 +28,4 @@ class SpendingController extends Controller
         return response()->json($mostSpentDeputies);
     }
 }
+
