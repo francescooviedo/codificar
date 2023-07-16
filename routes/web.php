@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\SpendingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/redes', [MediaController::class, 'show']);
+Route::get('/verbas', [SpendingController::class, 'getMostSpentDeputies']);
