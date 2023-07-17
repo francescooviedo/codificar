@@ -7,12 +7,21 @@ Projeto criado em PHP Laravel Sail e Mysql com o objetivo de colher dados de uma
 
 ## Instalação
 
-Instale my-project com npm
+### Faça o clone do projeto:
+    git clone git@github.com:francescooviedo/codificar.git
 
-```bash
-  ./vendor/bin/sail up -d
+### Abra a pasta do projeto:
+    cd codificar
+
+    Dentro da pasta remova o ".example" do arquivo ".env"
+### No terminal rodar os seguintes comandos:
+
+   - composer update && npm install
+   - ./vendor/bin/sail up
+   - ./vendor/bin/sail artisan migrate
+   - ./vendor/bin/sail artisan db:seed
   
-```
+
     
 ## Comandos Artisan
 
@@ -32,6 +41,10 @@ Instale my-project com npm
 #### Comando app:import-media:
     Comando responsável por buscar e inserir no banco de dados as redes socias dos
     deputados atuais
+
+#### Migrations e Seeds:
+    Por uma questão de comodidade todos os dados da api estao também nos arquivos de
+    seed.
 ## Documentação da API
 
 #### Retorna todas as redes sociais em ordem decrescente de uso
@@ -49,3 +62,7 @@ Instale my-project com npm
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `month`      | `number` | **Obrigatório**. O "month" (entre 1 e 12) |
+
+#### Thunder Client:
+    Os endpoints da api foram testados com o thunder Client, extensão do Visual Studio
+
