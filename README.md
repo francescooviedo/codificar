@@ -17,7 +17,7 @@ Projeto criado em PHP Laravel Sail e Mysql com o objetivo de colher dados de uma
 ### No terminal rodar os seguintes comandos:
 
    - composer update && npm install
-   - ./vendor/bin/sail up
+   - ./vendor/bin/sail up -d
    - ./vendor/bin/sail artisan migrate
    - ./vendor/bin/sail artisan db:seed
   
