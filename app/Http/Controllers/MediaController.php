@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 
 class MediaController extends Controller
@@ -10,20 +11,18 @@ class MediaController extends Controller
         $results = DB::table('medias')
             ->select('media', DB::raw('COUNT(*) AS count'))
             ->groupBy('media')
-            ->orderBy('count', 'desc')
-            ->take(5)
+            ->orderByDesc('count')
             ->get();
 
-        $responseData = [];
-        foreach ($results as $result) {
-            $responseData[] = [
+        $responseData = $results->map(function ($result) {
+            return [
                 'Name' => $result->media,
                 'count' => $result->count,
             ];
-        }
+        });
 
         return response()->json([
-            'message' => 'Top 5 Social Medias:',
+            'message' => 'All Social Medias (ordered from most to least used):',
             'data' => $responseData,
         ]);
     }

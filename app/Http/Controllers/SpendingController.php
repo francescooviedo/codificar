@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Spending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SpendingController extends Controller
 {
-    public function getMostSpentDeputies(Request $request)
+    public function show(Request $request, $month)
     {
+        $this->validateMonth($month);
+
         $mostSpentDeputies = DB::table('spendings')
             ->join('deputies', 'deputies.id', '=', 'spendings.congressperson_id')
-            ->whereIn(
-                DB::raw('(spendings.month, spendings.value)'),
-                function ($query) {
-                    $query->select(DB::raw('spendings.month, MAX(spendings.value)'))
-                        ->from('spendings')
-                        ->where('spendings.month', '>=', 2)
-                        ->groupBy('spendings.month');
-                }
-            )
+            ->where('spendings.month', $month)
+            ->orderByDesc('spendings.value')
+            ->take(5)
             ->select('spendings.month', 'deputies.nome', 'spendings.value')
-            ->orderBy('spendings.month')
             ->get();
 
         return response()->json($mostSpentDeputies);
     }
-}
 
+    private function validateMonth($month)
+    {
+        if (!is_numeric($month) || $month < 1 || $month > 12) {
+            abort(400, 'Invalid month. Month must be a number between 1 and 12.');
+        }
+    }
+}
